@@ -1,26 +1,62 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
+import {Counter} from "./Counter";
+import {ValueCounter} from "./ValueCounnter";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [startValue, setStartValue] = useState<number>(0)
+    const [maxValue, setMaxvalue] = useState<number>(1)
+    const [counter, setCounter] = useState<number>(startValue)
+    const [textValue, setTextValue] = useState<string>("")
+
+
+    let incCounterHandler = () => {
+        if (counter !== maxValue) {
+            setCounter(counter + 1)
+        }
+
+    }
+
+    let resentCounterHandler = () => {
+        setCounter(startValue)
+    }
+
+    useEffect(() => {
+        if (maxValue === 1 && startValue === 0) {
+            setTextValue('0')
+        } else {
+            if ((startValue >= maxValue) || (startValue && maxValue < 0)) {
+                setTextValue('Incorrect value')
+            } else {
+                setTextValue('enter values and press "set')
+            }
+
+        }
+    }, [startValue, maxValue])
+
+
+    return (
+        <div className="App">
+            <Counter
+                textValue={textValue}
+                counter={counter}
+                incCounterHandler={incCounterHandler}
+                resentCounterHandler={resentCounterHandler}
+            />
+            <ValueCounter
+                startValue={startValue}
+                maxValue={maxValue}
+                setStartValue={setStartValue}
+                setMaxvalue={setMaxvalue}
+                setCounter={setCounter}
+                setTextValue={setTextValue}
+
+            />
+
+
+        </div>
+    );
 }
 
 export default App;
