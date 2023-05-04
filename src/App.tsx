@@ -6,27 +6,25 @@ import {ValueCounter} from "./ValueCounnter";
 
 function App() {
     const [startValue, setStartValue] = useState<number>(0)
-    const [maxValue, setMaxvalue] = useState<number>(1)
+    const [maxValue, setMaxvalue] = useState<number>(5)
     const [counter, setCounter] = useState<number>(startValue)
     const [textValue, setTextValue] = useState<string>("")
 
 
-    let incCounterHandler = () => {
+    const incCounterHandler = () => {
         if (counter !== maxValue) {
             setCounter(counter + 1)
         }
-
     }
-
-    let resentCounterHandler = () => {
+    const resentCounterHandler = () => {
         setCounter(startValue)
     }
 
     useEffect(() => {
-        if (maxValue === 1 && startValue === 0) {
-            setTextValue('0')
+        if (maxValue === 5 && startValue === 0) {
+            setTextValue('')
         } else {
-            if ((startValue >= maxValue) || (startValue && maxValue < 0)) {
+            if ((startValue >= maxValue) || (startValue || maxValue < 0)) {
                 setTextValue('Incorrect value')
             } else {
                 setTextValue('enter values and press "set')
@@ -43,6 +41,8 @@ function App() {
                 counter={counter}
                 incCounterHandler={incCounterHandler}
                 resentCounterHandler={resentCounterHandler}
+                startValue={startValue}
+                maxValue={maxValue}
             />
             <ValueCounter
                 startValue={startValue}
@@ -51,6 +51,7 @@ function App() {
                 setMaxvalue={setMaxvalue}
                 setCounter={setCounter}
                 setTextValue={setTextValue}
+                counter={counter}
 
             />
 

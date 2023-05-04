@@ -7,6 +7,7 @@ type GetPropsType = {
     setStartValue: (startValue: number) => void,
     setMaxvalue: (maxValue: number) => void,
     setTextValue:(text:string)=>void
+    counter:number
 }
 
 export function ValueCounter(props: GetPropsType) {
@@ -18,14 +19,17 @@ export function ValueCounter(props: GetPropsType) {
         props.setMaxvalue(+e.currentTarget.value);
     }
     const newValue = () => {
-        props.setCounter(props.startValue)
-        props.setTextValue('');
+        if(props.startValue < props.maxValue){
+            props.setCounter(props.startValue)
+            props.setTextValue('');
+        }
+
     }
     return (
         <div>
-            <p>start value: <input value={props.startValue} type={'number'} min={'0'} max={''} onChange={inputHandler1}/></p>
-            <p>max value:<input value={props.maxValue} type={'number'} min={'0'} max={''} onChange={inputHandler2}/></p>
-            <button  onClick={newValue} >set</button>
+            <p>start value: <input value={props.startValue} type={'number'} min={'-10'} max={''} onChange={inputHandler1}/></p>
+            <p>max value:<input value={props.maxValue} type={'number'} min={'-10'} max={''} onChange={inputHandler2}/></p>
+            <button onClick={newValue} disabled={props.startValue >= props.maxValue || props.startValue < 0 || props.maxValue < 0 }>set</button>
         </div>
     )
 }
