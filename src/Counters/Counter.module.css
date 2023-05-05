@@ -1,0 +1,54 @@
+.counter {
+    width: 250px;
+    border: solid 10px deeppink;
+    border-radius: 20px;
+    padding: 17px 40px 37px 40px;
+    margin: 50px 100px 50px 0px;
+    background-color: hotpink;
+}
+
+.display {
+    height: 80px;
+    border: solid 5px deeppink;
+    border-radius: 10px;
+    text-align: center;
+    background-color: antiquewhite;
+   font-size: medium;
+}
+.displayNan{
+    height: 80px;
+    border: solid 5px deeppink;
+    border-radius: 10px;
+    text-align: center;
+    background-color: antiquewhite;
+    font-size: medium;
+    color: red;
+}
+
+.buttons {
+    padding: 20px 20px;
+    display: flex;
+    justify-content: space-around;
+    border: solid 5px deeppink;
+    border-radius: 10px;
+    background-color: lightpink;
+}
+
+.button {
+    width: 70px;
+    height: 30px;
+    background-color: purple;
+    border-radius: 5px;
+    border: purple;
+    color: white;
+}
+
+.disable {
+    width: 70px;
+    height: 30px;
+    background-color: purple;
+    opacity: 40%;
+    border-radius: 5px;
+    border: purple;
+    color: white;
+}

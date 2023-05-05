@@ -1,0 +1,68 @@
+.counter {
+    width: 250px;
+    border: solid 10px deeppink;
+    border-radius: 20px;
+    padding: 10px 40px 30px 40px;
+    margin: 50px 100px 50px 0px;
+    background-color: hotpink;
+}
+
+.pInputs {
+    display: flex;
+    flex-direction: column;
+    color: white;
+
+}
+
+.inputValue {
+    width: 150px;
+    height: 20px;
+    border: solid 5px deeppink;
+    border-radius: 10px;
+    text-align: center;
+    background-color: antiquewhite;
+    font-weight: bolder;
+    outline: none;
+}
+.inputError{
+
+    width: 150px;
+    height: 20px;
+    border: solid 5px red;
+    border-radius: 10px;
+    text-align: center;
+    background-color: coral;
+    font-weight: bolder;
+    outline: none;
+}
+
+
+.buttons {
+
+    padding: 20px 20px;
+    display: flex;
+    justify-content: space-around;
+    border: solid 5px deeppink;
+    border-radius: 10px;
+    background-color: lightpink;
+}
+
+.button {
+    width: 70px;
+    height: 30px;
+    background-color: purple;
+    border-radius: 5px;
+    border: purple;
+    color: white;
+}
+
+.disabled {
+    width: 70px;
+    height: 30px;
+    background-color: purple;
+    opacity: 40%;
+    border-radius: 5px;
+    border: purple;
+    color: white;
+
+}

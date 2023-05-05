@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import {Counter} from "./Counter";
-import {ValueCounter} from "./ValueCounnter";
+import {Counter} from "./Counters/Counter";
+import {ValueCounter} from "./ValuesCounters/ValueCounnter";
 
 
 function App() {
@@ -24,9 +24,9 @@ function App() {
         if (maxValue === 5 && startValue === 0) {
             setTextValue('')
         } else {
-            if ((startValue >= maxValue) || (startValue || maxValue < 0)) {
+            if ((startValue >= maxValue) || (startValue  < 0) || (maxValue < 0)) {
                 setTextValue('Incorrect value')
-            } else {
+            } else if ((startValue < maxValue)){
                 setTextValue('enter values and press "set')
             }
 
@@ -36,26 +36,27 @@ function App() {
 
     return (
         <div className="App">
-            <Counter
-                textValue={textValue}
-                counter={counter}
-                incCounterHandler={incCounterHandler}
-                resentCounterHandler={resentCounterHandler}
-                startValue={startValue}
-                maxValue={maxValue}
-            />
-            <ValueCounter
-                startValue={startValue}
-                maxValue={maxValue}
-                setStartValue={setStartValue}
-                setMaxvalue={setMaxvalue}
-                setCounter={setCounter}
-                setTextValue={setTextValue}
-                counter={counter}
-
-            />
-
-
+            <div>
+                <Counter
+                    textValue={textValue}
+                    counter={counter}
+                    incCounterHandler={incCounterHandler}
+                    resentCounterHandler={resentCounterHandler}
+                    startValue={startValue}
+                    maxValue={maxValue}
+                />
+            </div>
+            <div>
+                <ValueCounter
+                    startValue={startValue}
+                    maxValue={maxValue}
+                    setStartValue={setStartValue}
+                    setMaxvalue={setMaxvalue}
+                    setCounter={setCounter}
+                    setTextValue={setTextValue}
+                    counter={counter}
+                />
+            </div>
         </div>
     );
 }
