@@ -1,5 +1,6 @@
 .App {
   display: flex;
     justify-content: space-around;
-    margin: 0 35%;
+  flex-wrap: wrap;
+    margin: 0 auto;
 }
