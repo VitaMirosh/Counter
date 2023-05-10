@@ -8,7 +8,7 @@ function App() {
     const [startValue, setStartValue] = useState<number>(0)
     const [maxValue, setMaxvalue] = useState<number>(1)
     const [counter, setCounter] = useState<number>(startValue)
-    const [textValue, setTextValue] = useState<string>("")
+    const [textValue, setTextValue] = useState<string>('')
     const [disButton, setDisButton] = useState(true)
 
     const incCounterHandler = () => {
@@ -21,11 +21,30 @@ function App() {
         localStorage.setItem('valueSt', JSON.stringify(startValue))
         localStorage.setItem('valueMax', JSON.stringify(maxValue))
         localStorage.setItem('count', JSON.stringify(counter))
-    }, [startValue, maxValue, counter])
+        localStorage.setItem('text', textValue)
+        localStorage.setItem('dis', JSON.stringify(disButton))
+
+        if (maxValue === 1 && startValue === 0) {
+            setTextValue('')
+        } else {
+            if ((startValue >= maxValue) || (startValue < 0) || (maxValue < 0)) {
+                setTextValue('Incorrect value')
+            }
+        }
+
+    }, [startValue, maxValue, counter, textValue, disButton])
+
+    // useEffect(() => {
+    //     localStorage.setItem('valueSt', JSON.stringify(startValue))
+    //     localStorage.setItem('valueMax', JSON.stringify(maxValue))
+    //     localStorage.setItem('count', JSON.stringify(counter))
+    // }, [startValue, maxValue, counter])
 
     let strString = localStorage.getItem('valueSt')
     let maxString = localStorage.getItem('valueMax')
     let coun = localStorage.getItem('count')
+    let t = localStorage.getItem('text')
+    let disBut = localStorage.getItem('dis')
 
     useEffect(() => {
         if (strString) {
@@ -35,26 +54,20 @@ function App() {
             setMaxvalue(JSON.parse(maxString))
         }
         if (coun) {
-            setTextValue('')
             setCounter(JSON.parse(coun))
         }
-        setDisButton(false)
+        if (t) {
+            setTextValue(t)
+        }
+        if (disBut) {
+            setDisButton(JSON.parse(disBut))
+        }
     }, [])
 
 
     const resentCounterHandler = () => {
         setCounter(startValue)
     }
-
-    useEffect(() => {
-        if (maxValue === 1 && startValue === 0) {
-            
-        } else {
-            if ((startValue >= maxValue) || (startValue < 0) || (maxValue < 0)) {
-                setTextValue('Incorrect value')
-            }
-        }
-    }, [startValue, maxValue])
 
 
     return (
@@ -72,6 +85,7 @@ function App() {
             </div>
             <div>
                 <ValueCounter
+                    valueType={'max'}
                     startValue={startValue}
                     maxValue={maxValue}
                     setStartValue={setStartValue}

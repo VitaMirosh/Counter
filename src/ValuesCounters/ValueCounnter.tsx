@@ -1,4 +1,4 @@
-import {ChangeEvent, useState} from "react";
+import {ChangeEvent, useEffect, useState} from "react";
 import s from './ValueCounters.module.css'
 
 type GetPropsType = {
@@ -9,24 +9,41 @@ type GetPropsType = {
     setMaxvalue: (maxValue: number) => void,
     setTextValue: (text: string) => void
     counter: number
-    setDisButton:(dis:boolean)=>void
+    valueType: string
+    setDisButton: (dis: boolean) => void
 }
 
 export function ValueCounter(props: GetPropsType) {
     const [disBut, setDisBut] = useState(true)
 
-    const inputHandler1 = (e: ChangeEvent<HTMLInputElement>) => {
-        props.setStartValue(+e.currentTarget.value);
-        setDisBut(false)
-        props.setDisButton(true)
-        props.setTextValue('Нажмите set')
+    useEffect(() => {
+        localStorage.setItem("disabledBut", JSON.stringify(disBut))
+    }, [disBut])
+    let disabledBatton = localStorage.getItem("disabledBut")
 
+    useEffect(() => {
+        if (disabledBatton) {
+            setDisBut(JSON.parse(disabledBatton))
+        }
+    }, [])
+
+    const inputHandler1 = (e: ChangeEvent<HTMLInputElement>) => {
+        let newV = e.currentTarget.value;
+        props.setStartValue(+newV);
+        setDisBut(false)
+        props.setDisButton(true);
+        if (!(+newV >= props.maxValue || +newV < 0 || props.maxValue < 0)) {
+            props.setTextValue('set')
+        }
     }
     const inputHandler2 = (e: ChangeEvent<HTMLInputElement>) => {
-        props.setMaxvalue(+e.currentTarget.value);
+        let newV = e.currentTarget.value;
+        props.setMaxvalue(+newV);
         setDisBut(false)
-        props.setDisButton(true)
-        props.setTextValue('Нажмите set')
+        props.setDisButton(true);
+        if (!(props.startValue >= +newV || props.startValue < 0 || +newV < 0)) {
+            props.setTextValue('set')
+        }
     }
     const newValue = () => {
         if (props.startValue < props.maxValue) {
@@ -35,8 +52,9 @@ export function ValueCounter(props: GetPropsType) {
             setDisBut(true)
             props.setDisButton(false)
         }
-
     }
+
+
     const buttonDisabled = disBut ? s.disabled : s.button
     const inputError = (props.startValue >= props.maxValue || props.startValue < 0 || props.maxValue < 0) ? s.inputError : s.inputValue
     return (
@@ -49,7 +67,7 @@ export function ValueCounter(props: GetPropsType) {
             </div>
             <div className={s.buttons}>
                 <button className={buttonDisabled} onClick={newValue}
-                        disabled={disBut  ? props.startValue >= props.maxValue || props.startValue < 0 || props.maxValue < 0 : false}>set
+                        disabled={disBut ? props.startValue >= props.maxValue || props.startValue < 0 || props.maxValue < 0 : false}>set
                 </button>
             </div>
         </div>
