@@ -7,15 +7,19 @@ type PropsType = {
     counter: number,
     startValue: number,
     maxValue: number,
-    disButton:boolean
+    disButton: boolean,
+    setSetting?: (sett: boolean) => void,
+    setting?: boolean
 }
 
 export function Counter(props: PropsType) {
 
+    const switchOn = () => {
+        props.setSetting?.(false)
+        // if (props.setSetting) props.setSetting(false)
+    }
 
-
-
-    const disabledButton1 =props.disButton || props.counter === props.maxValue ? s.disable : s.button
+    const disabledButton1 = props.disButton || props.counter === props.maxValue ? s.disable : s.button
     const disabledButton2 = props.disButton || props.counter === props.startValue ? s.disable : s.button
     const displeyError = (props.counter === props.maxValue || props.startValue >= props.maxValue || props.startValue < 0 || props.maxValue < 0) ? s.displayNan : s.display
     return (
@@ -28,6 +32,8 @@ export function Counter(props: PropsType) {
                 <button className={disabledButton2} onClick={props.resentCounterHandler}
                         disabled={props.disButton}>reset
                 </button>
+
+                <button onClick={switchOn}>settings</button>
             </div>
         </div>
     )

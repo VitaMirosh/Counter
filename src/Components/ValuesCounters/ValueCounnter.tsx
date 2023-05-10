@@ -9,7 +9,6 @@ type GetPropsType = {
     setMaxvalue: (maxValue: number) => void,
     setTextValue: (text: string) => void
     counter: number
-    valueType: string
     setDisButton: (dis: boolean) => void
 }
 

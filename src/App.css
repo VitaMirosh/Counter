@@ -1,6 +1,14 @@
 .App {
-  display: flex;
+}
+.counter{
+    display: flex;
     justify-content: space-around;
-  flex-wrap: wrap;
+    align-items: center;
+    flex-wrap: wrap;
     margin: 0 auto;
+
+}
+.App>button{
+    display: block;
+    margin: 20px 0 0 20px;
 }

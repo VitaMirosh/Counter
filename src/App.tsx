@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
-import {Counter} from "./Counters/Counter";
-import {ValueCounter} from "./ValuesCounters/ValueCounnter";
-
+import {SuperCounter} from "./SuperCounter/SuperCounter";
+import {SimpleCounter} from "./Components/SimpleCounter/SimpleCounter";
 
 function App() {
     const [startValue, setStartValue] = useState<number>(0)
@@ -10,6 +9,7 @@ function App() {
     const [counter, setCounter] = useState<number>(startValue)
     const [textValue, setTextValue] = useState<string>('')
     const [disButton, setDisButton] = useState(true)
+    const [switchButton, setSwitchButton] = useState(true)
 
     const incCounterHandler = () => {
         if (counter !== maxValue) {
@@ -34,11 +34,6 @@ function App() {
 
     }, [startValue, maxValue, counter, textValue, disButton])
 
-    // useEffect(() => {
-    //     localStorage.setItem('valueSt', JSON.stringify(startValue))
-    //     localStorage.setItem('valueMax', JSON.stringify(maxValue))
-    //     localStorage.setItem('count', JSON.stringify(counter))
-    // }, [startValue, maxValue, counter])
 
     let strString = localStorage.getItem('valueSt')
     let maxString = localStorage.getItem('valueMax')
@@ -70,32 +65,46 @@ function App() {
     }
 
 
+    const click = () => {
+        if (switchButton) {
+
+        }
+    }
+
+
     return (
         <div className="App">
-            <div>
-                <Counter
-                    textValue={textValue}
-                    counter={counter}
-                    incCounterHandler={incCounterHandler}
-                    resentCounterHandler={resentCounterHandler}
-                    startValue={startValue}
-                    maxValue={maxValue}
-                    disButton={disButton}
-                />
-            </div>
-            <div>
-                <ValueCounter
-                    valueType={'max'}
-                    startValue={startValue}
-                    maxValue={maxValue}
-                    setStartValue={setStartValue}
-                    setMaxvalue={setMaxvalue}
-                    setCounter={setCounter}
-                    setTextValue={setTextValue}
-                    counter={counter}
-                    setDisButton={setDisButton}
-                />
-            </div>
+            <button className={'but'} onClick={click}>Click</button>
+            {/*<SimpleCounter*/}
+            {/*    textValue={textValue}*/}
+            {/*    counter={counter}*/}
+            {/*    incCounterHandler={incCounterHandler}*/}
+            {/*    resentCounterHandler={resentCounterHandler}*/}
+            {/*    startValue={startValue}*/}
+            {/*    maxValue={maxValue}*/}
+            {/*    disButton={disButton}*/}
+            {/*    setStartValue={setStartValue}*/}
+            {/*    setMaxvalue={setMaxvalue}*/}
+            {/*    setCounter={setCounter}*/}
+            {/*    setTextValue={setTextValue}*/}
+            {/*    setDisButton={setDisButton}*/}
+            {/*/>*/}
+            <SuperCounter
+                textValue={textValue}
+                counter={counter}
+                incCounterHandler={incCounterHandler}
+                resentCounterHandler={resentCounterHandler}
+                startValue={startValue}
+                maxValue={maxValue}
+                disButton={disButton}
+                setStartValue={setStartValue}
+                setMaxvalue={setMaxvalue}
+                setCounter={setCounter}
+                setTextValue={setTextValue}
+                setDisButton={setDisButton}
+
+            />
+
         </div>
     );
 }
