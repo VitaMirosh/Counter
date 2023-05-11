@@ -22,18 +22,18 @@ type SuperCounter = {
 export function SuperCounter(props: SuperCounter) {
 
     const [setting, setSetting] = useState<boolean>(true)
-useEffect(()=>{
-    localStorage.setItem('settings',JSON.stringify(setting))
-},[setting])
+    useEffect(() => {
+        localStorage.setItem('settings', JSON.stringify(setting))
+    }, [setting])
 
-    let settingsNew=localStorage.getItem('settings')
+    let settingsNew = localStorage.getItem('settings')
 
-    useEffect(()=>{
-        if(settingsNew){
-            setSetting (JSON.parse(settingsNew))
+    useEffect(() => {
+        if (settingsNew) {
+            setSetting(JSON.parse(settingsNew))
         }
 
-    },[])
+    }, [])
     return (
         <div className={s.super}>
             {setting

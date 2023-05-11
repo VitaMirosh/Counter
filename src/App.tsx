@@ -9,7 +9,7 @@ function App() {
     const [counter, setCounter] = useState<number>(startValue)
     const [textValue, setTextValue] = useState<string>('')
     const [disButton, setDisButton] = useState(true)
-    const [switchButton, setSwitchButton] = useState(true)
+    const [switchButton, setSwitchButton] = useState<boolean>(true)
 
     const incCounterHandler = () => {
         if (counter !== maxValue) {
@@ -72,11 +72,7 @@ function App() {
 
 
     const click = () => {
-        if (switchButton) {
-            setSwitchButton(false)
-        }else{
-            setSwitchButton(true)
-        }
+            setSwitchButton(!switchButton)
     }
 
 
