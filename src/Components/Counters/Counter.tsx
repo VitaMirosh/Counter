@@ -9,14 +9,14 @@ type PropsType = {
     maxValue: number,
     disButton: boolean,
     setSetting?: (sett: boolean) => void,
-    setting?: boolean
+    setting?: boolean,
+
 }
 
 export function Counter(props: PropsType) {
 
     const switchOn = () => {
         props.setSetting?.(false)
-        // if (props.setSetting) props.setSetting(false)
     }
 
     const disabledButton1 = props.disButton || props.counter === props.maxValue ? s.disable : s.button
@@ -25,16 +25,29 @@ export function Counter(props: PropsType) {
     return (
         <div className={s.counter}>
             <h1 className={displeyError}>{props.textValue === '' ? props.counter : props.textValue}</h1>
-            <div className={s.buttons}>
-                <button className={disabledButton1} onClick={props.incCounterHandler}
-                        disabled={props.disButton}>inc
-                </button>
-                <button className={disabledButton2} onClick={props.resentCounterHandler}
-                        disabled={props.disButton}>reset
-                </button>
+            {props.setting ?
+                <div className={s.buttons}>
 
-                <button onClick={switchOn}>settings</button>
-            </div>
+                    < button className={disabledButton1} onClick={props.incCounterHandler}
+                             disabled={props.disButton}>inc
+                    </button>
+                    <button className={disabledButton2} onClick={props.resentCounterHandler}
+                            disabled={props.disButton}>reset
+                    </button>
+                    <button className={s.button} onClick={switchOn}>settings</button>
+                </div>
+                :
+                <div className={s.buttons}>
+
+                    < button className={disabledButton1} onClick={props.incCounterHandler}
+                             disabled={props.disButton}>inc
+                    </button>
+                    <button className={disabledButton2} onClick={props.resentCounterHandler}
+                            disabled={props.disButton}>reset
+                    </button>
+
+                </div>
+            }
         </div>
     )
 }

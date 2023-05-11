@@ -8,23 +8,26 @@ type GetPropsType = {
     setStartValue: (startValue: number) => void,
     setMaxvalue: (maxValue: number) => void,
     setTextValue: (text: string) => void
-    counter: number
-    setDisButton: (dis: boolean) => void
+    counter: number,
+    setDisButton: (dis: boolean) => void,
+    setSetting?: (sett: boolean) => void,
+
+
 }
 
 export function ValueCounter(props: GetPropsType) {
     const [disBut, setDisBut] = useState(true)
 
-    useEffect(() => {
-        localStorage.setItem("disabledBut", JSON.stringify(disBut))
-    }, [disBut])
-    let disabledBatton = localStorage.getItem("disabledBut")
-
-    useEffect(() => {
-        if (disabledBatton) {
-            setDisBut(JSON.parse(disabledBatton))
-        }
-    }, [])
+    // useEffect(() => {
+    //     localStorage.setItem("disabledBut", JSON.stringify(disBut))
+    // }, [disBut])
+    // let disabledBatton = localStorage.getItem("disabledBut")
+    //
+    // useEffect(() => {
+    //     if (disabledBatton) {
+    //         setDisBut(JSON.parse(disabledBatton))
+    //     }
+    // }, [])
 
     const inputHandler1 = (e: ChangeEvent<HTMLInputElement>) => {
         let newV = e.currentTarget.value;
@@ -50,6 +53,7 @@ export function ValueCounter(props: GetPropsType) {
             props.setTextValue('');
             setDisBut(true)
             props.setDisButton(false)
+           props.setSetting?.(true)
         }
     }
 
@@ -66,7 +70,7 @@ export function ValueCounter(props: GetPropsType) {
             </div>
             <div className={s.buttons}>
                 <button className={buttonDisabled} onClick={newValue}
-                        disabled={disBut ? props.startValue >= props.maxValue || props.startValue < 0 || props.maxValue < 0 : false}>set
+                        disabled={disBut ? props.startValue >= props.maxValue || props.startValue < 0 || props.maxValue < 0 || props.startValue === props.counter : false}>set
                 </button>
             </div>
         </div>

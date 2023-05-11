@@ -12,3 +12,11 @@
     display: block;
     margin: 20px 0 0 20px;
 }
+.button{
+    width: 70px;
+    height: 30px;
+    background-color: purple;
+    border-radius: 5px;
+    border: purple;
+    color: white;
+}

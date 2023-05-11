@@ -1,7 +1,7 @@
 import {Counter} from "../Components/Counters/Counter";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {ValueCounter} from "../Components/ValuesCounters/ValueCounnter";
-import {SimpleCounter} from "../Components/SimpleCounter/SimpleCounter";
+import s from './SuperCount.module.css'
 
 type SuperCounter = {
     textValue: string,
@@ -22,9 +22,20 @@ type SuperCounter = {
 export function SuperCounter(props: SuperCounter) {
 
     const [setting, setSetting] = useState<boolean>(true)
+useEffect(()=>{
+    localStorage.setItem('settings',JSON.stringify(setting))
+},[setting])
 
+    let settingsNew=localStorage.getItem('settings')
+
+    useEffect(()=>{
+        if(settingsNew){
+            setSetting (JSON.parse(settingsNew))
+        }
+
+    },[])
     return (
-        <>
+        <div className={s.super}>
             {setting
                 ? <Counter
                     textValue={props.textValue}
@@ -46,11 +57,12 @@ export function SuperCounter(props: SuperCounter) {
                     setTextValue={props.setTextValue}
                     counter={props.counter}
                     setDisButton={props.setDisButton}
+                    setSetting={setSetting}
 
                 />
 
             }
-        </>
+        </div>
     )
 
 
